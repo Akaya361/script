@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Лубенникова Анастасия, К04-361
+# Задание 9-3
+
+echo $(pwd)
+files=$(ls $(pwd))
+
+agree=y
+
+while [ $agree = y ]; do
+
+condition=0
+
+echo "Enter old file extension:"
+read ext1
+
+echo "Enter new file extension:"
+read ext2
+
+echo ""
+
+for n in $files
+do
+if [[ "$n" == *"."$ext1 ]]; then
+condition=1
+
+name=$(basename $n "$ext1")
+mv $n $name$ext2
+
+fi
+done
+if [ $condition = 0 ]; then
+echo -e "no files found\n"
+else
+echo -e "success\n"
+fi
+
+echo "Do you want to continue?(y\n)"
+         read agree
+         if [ $agree = n ]; then
+exit 0
+
+fi
+
+done
